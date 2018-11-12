@@ -1,0 +1,16 @@
+server:
+  port: 20001
+
+spring:
+  application:
+    name: Client Demo
+
+  jpa:
+    database: sql_server
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:sqlserver://192.168.99.100:1433;databaseName=client_demo
+    username: sa
+    password: saWasHere??01
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
