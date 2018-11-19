@@ -10,4 +10,16 @@ import lombok.NoArgsConstructor;
 public class ClientRequest {
 
     private String name;
+
+    private String email;
+
+    private String phoneNumber;
+
+    private String notes;
+
+    private String address;
+
+    private String zipcode;
+
+    private String country;
 }

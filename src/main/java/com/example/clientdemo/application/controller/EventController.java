@@ -1,8 +1,9 @@
 package com.example.clientdemo.application.controller;
 
 import com.example.clientdemo.application.controller.dto.EventRequest;
+import com.example.clientdemo.application.controller.dto.EventResponse;
 import com.example.clientdemo.domain.model.Event;
-import com.example.clientdemo.domain.services.EventService;
+import com.example.clientdemo.application.services.EventService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,33 +23,46 @@ public class EventController {
     private final ModelMapper mapper;
 
     @GetMapping(path = "{id}")
-    public ResponseEntity<Event> get(@PathVariable int id){
-        return ResponseEntity.ok(eventService.get(id));
+    public ResponseEntity<EventResponse> get(@PathVariable int id) {
+        return ResponseEntity.ok(mapper.map(eventService.get(id), EventResponse.class));
     }
 
     @GetMapping
-    public ResponseEntity<List<Event>> getAll(){
-        return ResponseEntity.ok(eventService.getAll());
+    public ResponseEntity<List<EventResponse>> getAll() {
+
+        List<EventResponse> eventResponseList =
+                eventService.getAll()
+                        .stream()
+                        .map(event -> mapper.map(event, EventResponse.class))
+                        .collect(Collectors.toList());
+
+        return ResponseEntity.ok(eventResponseList);
     }
 
     @PostMapping
-    public ResponseEntity<Event> create(@RequestBody EventRequest request){
+    public ResponseEntity<EventResponse> create(@RequestBody EventRequest request) {
 
         Event event = mapper.map(request, Event.class);
 
-        return new ResponseEntity<>(eventService.create(event), HttpStatus.CREATED);
+        return new ResponseEntity<>(
+                mapper.map(eventService.create(event), EventResponse.class),
+                HttpStatus.CREATED
+        );
     }
 
     @PutMapping(path = "{id}")
-    public ResponseEntity<Event> update(@PathVariable int id, @RequestBody EventRequest request){
+    public ResponseEntity<EventResponse> update(@PathVariable int id, @RequestBody EventRequest request) {
 
         Event event = mapper.map(request, Event.class);
 
-        return new ResponseEntity<>(eventService.update(id, event), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(
+                mapper.map(eventService.update(id, event), EventResponse.class),
+                HttpStatus.ACCEPTED
+        );
     }
 
     @DeleteMapping(path = "{id}")
-    public ResponseEntity delete(@PathVariable int id){
+    public ResponseEntity delete(@PathVariable int id) {
 
         eventService.remove(id);
         return ResponseEntity.accepted().build();

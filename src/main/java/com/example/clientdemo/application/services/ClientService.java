@@ -1,4 +1,4 @@
-package com.example.clientdemo.domain.services;
+package com.example.clientdemo.application.services;
 
 import com.example.clientdemo.domain.model.Client;
 import com.example.clientdemo.infrastructure.repository.ClientRepository;

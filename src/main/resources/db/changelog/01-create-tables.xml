@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="01" author="9kayer">
+
+        <createTable tableName="clients"
+                     remarks="A table to contain all clients">
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="email" type="varchar(255)"/>
+            <column name="phone_number" type="varchar(14)"/>
+            <column name="notes" type="varchar(1000)"/>
+            <column name="address" type="varchar(1000)"/>
+            <column name="zipcode" type="varchar(10)"/>
+            <column name="country" type="varchar(50)"/>
+        </createTable>
+
+        <createTable tableName="events"
+                     remarks="A table to contain all the events">
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="date"/>
+        </createTable>
+
+        <createTable tableName="clients_events">
+            <column name="client_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="event_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="client_id, event_id"
+                       constraintName="clients_events_pk"
+                       schemaName="dbo"
+                       tableName="clients_events"/>
+
+        <addForeignKeyConstraint baseTableName="clients_events" baseColumnNames="client_id"
+                                 constraintName="clients_fk"
+                                 referencedTableName="clients" referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="clients_events" baseColumnNames="event_id"
+                                 constraintName="events_fk"
+                                 referencedTableName="events" referencedColumnNames="id"/>
+
+    </changeSet>
+</databaseChangeLog>

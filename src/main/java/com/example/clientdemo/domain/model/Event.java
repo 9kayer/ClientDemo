@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "EVENTS", schema = "dbo")
+@Table(name = "events", schema = "dbo")
 @Data
 @Builder(toBuilder = true)
 @NoArgsConstructor
@@ -19,23 +20,24 @@ import java.util.List;
 public class Event {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(generator = "event_generator")
+    @GenericGenerator(name = "event_generator", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
 
     private String name;
 
     private LocalDateTime date;
 
-    @Transient
-    private List<Client> clientsPresent = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "events")
+    private List<Client> clients = new ArrayList<>();
 
     public Event addClient(Client client) {
-        clientsPresent.add(client);
+        clients.add(client);
         return this;
     }
 
     public Event removeClient(Client client){
-        clientsPresent.remove(client);
+        clients.remove(client);
         return this;
     }
 }

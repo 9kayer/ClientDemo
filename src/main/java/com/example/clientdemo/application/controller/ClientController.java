@@ -1,8 +1,9 @@
 package com.example.clientdemo.application.controller;
 
 import com.example.clientdemo.application.controller.dto.ClientRequest;
+import com.example.clientdemo.application.controller.dto.ClientResponse;
 import com.example.clientdemo.domain.model.Client;
-import com.example.clientdemo.domain.services.ClientService;
+import com.example.clientdemo.application.services.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,29 +23,45 @@ public class ClientController {
     private final ModelMapper mapper;
 
     @GetMapping(path = "{id}")
-    public ResponseEntity<Client> get(@PathVariable int id){
-        return ResponseEntity.ok(clientService.get(id));
+    public ResponseEntity<ClientResponse> get(@PathVariable int id){
+
+        Client client = clientService.get(id);
+
+        return ResponseEntity.ok(mapper.map(client, ClientResponse.class));
     }
 
     @GetMapping
-    public ResponseEntity<List<Client>> getAll(){
-        return ResponseEntity.ok(clientService.getAll());
+    public ResponseEntity<List<ClientResponse>> getAll(){
+
+        List<ClientResponse> clientResponsesList =
+                clientService.getAll()
+                    .stream()
+                    .map( client -> mapper.map(client, ClientResponse.class) )
+                    .collect(Collectors.toList());
+
+        return ResponseEntity.ok(clientResponsesList);
     }
 
     @PostMapping
-    public ResponseEntity<Client> create( @RequestBody ClientRequest request){
+    public ResponseEntity<ClientResponse> create( @RequestBody ClientRequest request){
 
         Client client = mapper.map(request, Client.class);
 
-        return new ResponseEntity<>(clientService.create(client), HttpStatus.CREATED);
+        return new ResponseEntity<>(
+                mapper.map(clientService.create(client), ClientResponse.class),
+                HttpStatus.CREATED
+        );
     }
 
     @PutMapping(path = "{id}")
-    public ResponseEntity<Client> update(@PathVariable int id, @RequestBody ClientRequest request){
+    public ResponseEntity<ClientResponse> update(@PathVariable int id, @RequestBody ClientRequest request){
 
         Client client = mapper.map(request, Client.class);
 
-        return new ResponseEntity<>(clientService.update(id, client), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(
+                mapper.map(clientService.update(id, client), ClientResponse.class),
+                HttpStatus.ACCEPTED
+        );
     }
 
     @DeleteMapping(path = "{id}")

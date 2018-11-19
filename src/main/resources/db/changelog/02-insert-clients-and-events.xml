@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="02" author="9kayer">
+        <comment>Inserting clients and events</comment>
+        <insert tableName="clients">
+            <column name="id" value="1"/>
+            <column name="name" value="client_01"/>
+            <column name="email" value="email_1@mail.com"/>
+            <column name="phone_number" value="123456789"/>
+            <column name="notes" value="apontamentos do car*lh*"/>
+            <column name="address" value="Cais do Sodre"/>
+            <column name="zipcode" value="12345"/>
+            <column name="country" value="country_01"/>
+        </insert>
+        <insert tableName="clients">
+            <column name="id" value="2"/>
+            <column name="name" value="client_02"/>
+            <column name="email" value="email_2@mail.com"/>
+            <column name="phone_number" value="123456789"/>
+            <column name="notes" value="apontamentos do carv*lh*"/>
+            <column name="address" value="Rua da Prata"/>
+            <column name="zipcode" value="12346"/>
+            <column name="country" value="country_02"/>
+        </insert>
+        <insert tableName="clients">
+            <column name="id" value="3"/>
+            <column name="name" value="client_03"/>
+            <column name="email" value="email_3@mail.com"/>
+            <column name="phone_number" value="123456789"/>
+            <column name="notes" value="Nao há"/>
+            <column name="address" value="Santos"/>
+            <column name="zipcode" value="123425"/>
+            <column name="country" value="country_03"/>
+        </insert>
+        <insert tableName="clients">
+            <column name="id" value="4"/>
+            <column name="name" value="client_04"/>
+            <column name="email" value="email_4@mail.com"/>
+            <column name="phone_number" value="123456789"/>
+            <column name="notes" value="A bíblia"/>
+            <column name="address" value="Terreiro do Paço"/>
+            <column name="zipcode" value="12345"/>
+            <column name="country" value="country_04"/>
+        </insert>
+
+        <insert tableName="events">
+            <column name="id" value="1"/>
+            <column name="name" value="event_01"/>
+            <column name="date" valueDate="18-11-2018"/>
+        </insert>
+        <insert tableName="events">
+            <column name="id" value="2"/>
+            <column name="name" value="event_02"/>
+            <column name="date" valueDate="18-11-2018"/>
+        </insert>
+
+        <insert tableName="clients_events">
+            <column name="client_id" value="1"/>
+            <column name="event_id" value="1"/>
+        </insert>
+        <insert tableName="clients_events">
+            <column name="client_id" value="2"/>
+            <column name="event_id" value="1"/>
+        </insert>
+        <insert tableName="clients_events">
+            <column name="client_id" value="3"/>
+            <column name="event_id" value="1"/>
+        </insert>
+        <insert tableName="clients_events">
+            <column name="client_id" value="1"/>
+            <column name="event_id" value="2"/>
+        </insert>
+        <insert tableName="clients_events">
+            <column name="client_id" value="4"/>
+            <column name="event_id" value="2"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>

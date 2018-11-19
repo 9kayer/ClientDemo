@@ -10,7 +10,10 @@ spring:
     hibernate:
       ddl-auto: none
   datasource:
-    url: jdbc:sqlserver://192.168.99.100:1433;databaseName=client_demo
+    url: jdbc:sqlserver://192.168.99.100:1433;databaseName=client_demo_liq
     username: sa
     password: saWasHere??01
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+  liquibase:
+    change-log: classpath:db/liquibase-changelog.xml
