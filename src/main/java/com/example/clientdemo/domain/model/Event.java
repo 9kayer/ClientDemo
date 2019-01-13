@@ -8,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,9 @@ public class Event {
 
     private String name;
 
-    private LocalDateTime date;
+    private OffsetDateTime date;
+
+    private String location;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "events")
     private List<Client> clients = new ArrayList<>();

@@ -23,7 +23,7 @@ public class EventController {
     private final ModelMapper mapper;
 
     @GetMapping(path = "{id}")
-    public ResponseEntity<EventResponse> get(@PathVariable int id) {
+    public ResponseEntity<EventResponse> get(@PathVariable String id) {
         return ResponseEntity.ok(mapper.map(eventService.get(id), EventResponse.class));
     }
 
@@ -51,7 +51,7 @@ public class EventController {
     }
 
     @PutMapping(path = "{id}")
-    public ResponseEntity<EventResponse> update(@PathVariable int id, @RequestBody EventRequest request) {
+    public ResponseEntity<EventResponse> update(@PathVariable String id, @RequestBody EventRequest request) {
 
         Event event = mapper.map(request, Event.class);
 
@@ -62,7 +62,7 @@ public class EventController {
     }
 
     @DeleteMapping(path = "{id}")
-    public ResponseEntity delete(@PathVariable int id) {
+    public ResponseEntity delete(@PathVariable String id) {
 
         eventService.remove(id);
         return ResponseEntity.accepted().build();

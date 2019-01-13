@@ -33,6 +33,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="date" type="date"/>
+            <column name="location" type="varchar(50)"/>
         </createTable>
 
         <createTable tableName="clients_events">

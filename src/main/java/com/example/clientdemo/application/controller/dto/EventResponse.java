@@ -1,12 +1,12 @@
 package com.example.clientdemo.application.controller.dto;
 
-import com.example.clientdemo.domain.model.Client;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +20,9 @@ public class EventResponse {
 
     private String name;
 
-    private LocalDateTime date;
+    private OffsetDateTime date;
+
+    private String location;
 
     private List<EventClientResponse> clients = new ArrayList<>();
 

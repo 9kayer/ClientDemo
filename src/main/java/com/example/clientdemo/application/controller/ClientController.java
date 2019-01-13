@@ -23,7 +23,7 @@ public class ClientController {
     private final ModelMapper mapper;
 
     @GetMapping(path = "{id}")
-    public ResponseEntity<ClientResponse> get(@PathVariable int id){
+    public ResponseEntity<ClientResponse> get(@PathVariable String id) {
 
         Client client = clientService.get(id);
 
@@ -31,19 +31,19 @@ public class ClientController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ClientResponse>> getAll(){
+    public ResponseEntity<List<ClientResponse>> getAll() {
 
         List<ClientResponse> clientResponsesList =
                 clientService.getAll()
-                    .stream()
-                    .map( client -> mapper.map(client, ClientResponse.class) )
-                    .collect(Collectors.toList());
+                        .stream()
+                        .map(client -> mapper.map(client, ClientResponse.class))
+                        .collect(Collectors.toList());
 
         return ResponseEntity.ok(clientResponsesList);
     }
 
     @PostMapping
-    public ResponseEntity<ClientResponse> create( @RequestBody ClientRequest request){
+    public ResponseEntity<ClientResponse> create(@RequestBody ClientRequest request) {
 
         Client client = mapper.map(request, Client.class);
 
@@ -54,7 +54,7 @@ public class ClientController {
     }
 
     @PutMapping(path = "{id}")
-    public ResponseEntity<ClientResponse> update(@PathVariable int id, @RequestBody ClientRequest request){
+    public ResponseEntity<ClientResponse> update(@PathVariable String id, @RequestBody ClientRequest request) {
 
         Client client = mapper.map(request, Client.class);
 
@@ -65,7 +65,7 @@ public class ClientController {
     }
 
     @DeleteMapping(path = "{id}")
-    public ResponseEntity delete(@PathVariable int id){
+    public ResponseEntity delete(@PathVariable String id) {
 
         clientService.remove(id);
         return ResponseEntity.accepted().build();

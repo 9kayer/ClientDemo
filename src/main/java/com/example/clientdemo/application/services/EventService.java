@@ -14,7 +14,7 @@ public class EventService {
     private final EventRepository eventRepository;
 
 
-    public Event get(int id) {
+    public Event get(String id) {
         return eventRepository.findById(id)
                 .orElseThrow(RuntimeException::new);
     }
@@ -27,7 +27,7 @@ public class EventService {
         return eventRepository.save(event);
     }
 
-    public Event update(int id, Event update) {
+    public Event update(String id, Event update) {
         Event event = eventRepository.findById(id)
                 .map(
                         item -> item.toBuilder()
@@ -40,7 +40,7 @@ public class EventService {
         return eventRepository.save(event);
     }
 
-    public void remove(int id){
+    public void remove(String id){
         eventRepository.deleteById(id);
 
         if (eventRepository.existsById(id)){

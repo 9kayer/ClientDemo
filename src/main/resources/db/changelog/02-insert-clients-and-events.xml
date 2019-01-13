@@ -53,11 +53,13 @@
             <column name="id" value="1"/>
             <column name="name" value="event_01"/>
             <column name="date" valueDate="18-11-2018"/>
+            <column name="location" value="Lisbon"/>
         </insert>
         <insert tableName="events">
             <column name="id" value="2"/>
             <column name="name" value="event_02"/>
             <column name="date" valueDate="18-11-2018"/>
+            <column name="location" value="Porto"/>
         </insert>
 
         <insert tableName="clients_events">

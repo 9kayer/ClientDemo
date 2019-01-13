@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: Client Demo
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+
 
   jpa:
     database: sql_server
