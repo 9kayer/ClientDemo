@@ -8,7 +8,7 @@
 
     <changeSet id="02" author="9kayer">
         <comment>Inserting clients and events</comment>
-        <insert tableName="clients">
+        <insert tableName="clients" schemaName="${schema}">
             <column name="id" value="1"/>
             <column name="name" value="client_01"/>
             <column name="email" value="email_1@mail.com"/>
@@ -18,7 +18,7 @@
             <column name="zipcode" value="12345"/>
             <column name="country" value="country_01"/>
         </insert>
-        <insert tableName="clients">
+        <insert tableName="clients" schemaName="${schema}">
             <column name="id" value="2"/>
             <column name="name" value="client_02"/>
             <column name="email" value="email_2@mail.com"/>
@@ -28,7 +28,7 @@
             <column name="zipcode" value="12346"/>
             <column name="country" value="country_02"/>
         </insert>
-        <insert tableName="clients">
+        <insert tableName="clients" schemaName="${schema}">
             <column name="id" value="3"/>
             <column name="name" value="client_03"/>
             <column name="email" value="email_3@mail.com"/>
@@ -38,7 +38,7 @@
             <column name="zipcode" value="123425"/>
             <column name="country" value="country_03"/>
         </insert>
-        <insert tableName="clients">
+        <insert tableName="clients" schemaName="${schema}">
             <column name="id" value="4"/>
             <column name="name" value="client_04"/>
             <column name="email" value="email_4@mail.com"/>
@@ -49,36 +49,36 @@
             <column name="country" value="country_04"/>
         </insert>
 
-        <insert tableName="events">
+        <insert tableName="events" schemaName="${schema}">
             <column name="id" value="1"/>
             <column name="name" value="event_01"/>
             <column name="date" valueDate="18-11-2018"/>
             <column name="location" value="Lisbon"/>
         </insert>
-        <insert tableName="events">
+        <insert tableName="events" schemaName="${schema}">
             <column name="id" value="2"/>
             <column name="name" value="event_02"/>
             <column name="date" valueDate="18-11-2018"/>
             <column name="location" value="Porto"/>
         </insert>
 
-        <insert tableName="clients_events">
+        <insert tableName="clients_events" schemaName="${schema}">
             <column name="client_id" value="1"/>
             <column name="event_id" value="1"/>
         </insert>
-        <insert tableName="clients_events">
+        <insert tableName="clients_events" schemaName="${schema}">
             <column name="client_id" value="2"/>
             <column name="event_id" value="1"/>
         </insert>
-        <insert tableName="clients_events">
+        <insert tableName="clients_events" schemaName="${schema}">
             <column name="client_id" value="3"/>
             <column name="event_id" value="1"/>
         </insert>
-        <insert tableName="clients_events">
+        <insert tableName="clients_events" schemaName="${schema}">
             <column name="client_id" value="1"/>
             <column name="event_id" value="2"/>
         </insert>
-        <insert tableName="clients_events">
+        <insert tableName="clients_events" schemaName="${schema}">
             <column name="client_id" value="4"/>
             <column name="event_id" value="2"/>
         </insert>
